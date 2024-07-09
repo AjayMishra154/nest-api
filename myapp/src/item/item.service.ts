@@ -8,7 +8,9 @@ import { UpdateItemDto } from './dto/update-item.dto';
 @Injectable()
 export class ItemsService {
   constructor(@InjectModel(Item.name) private itemModel: Model<ItemDocument>) {}
-
+  public getItems(): string[] {
+    return ['sword', 'axe', 'pants'];
+  }
   async findAll(): Promise<Item[]> {
     return this.itemModel.find().exec();
   }
@@ -36,5 +38,23 @@ export class ItemsService {
 
   async delete(id: string): Promise<Item> {
     return this.itemModel.findByIdAndDelete(id).exec();
+  }
+
+  async program(arr: number[]): Promise<number[][]> {
+    const a: number[][] = [];
+    for (let i = 0; i < arr.length; i++) {
+      let count = 0;
+      for (let j = 0; j < a.length; j++) {
+        if (arr[i] > a[j][0]) {
+          a[j].push(arr[i]);
+          count += 1;
+          break;
+        }
+      }
+      if (count == 0) {
+        a.push([arr[i]]);
+      }
+    }
+    return a;
   }
 }

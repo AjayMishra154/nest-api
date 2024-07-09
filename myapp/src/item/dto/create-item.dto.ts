@@ -1,4 +1,4 @@
-import { IsString, IsEmail, Length, Matches } from 'class-validator';
+import { IsString, IsEmail, Length, Matches, IsArray } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateItemDto {
@@ -33,4 +33,12 @@ export class CreateItemDto {
   @Length(6, 12, { message: 'Password must be between 6 and 12 characters' })
   @Matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$/, { message: 'Password must contain at least one uppercase letter, one lowercase letter, and one number' })
   password: string;
+
+  @ApiProperty({
+    description: 'give a array',
+    type: Array,
+    example: '[7,8,9,10,22,34]'
+  })
+  @IsArray()
+  arr: Number[];
 }

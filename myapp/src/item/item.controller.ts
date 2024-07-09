@@ -4,11 +4,10 @@ import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, ValidationP
 import { ItemsService } from './item.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
+import { ProgramDto } from './dto/program.dto';
 import { Item } from './item.schema';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
-
-
 
 @ApiTags('items')
 @ApiBearerAuth()
@@ -89,4 +88,12 @@ export class ItemsController {
     }
     return item;
   }
+
+
+  @Post('program')
+  async program(@Body() programDto: ProgramDto): Promise<number[][]> {
+    return this.itemsService.program(programDto.arr);
+  }  
 }
+
+

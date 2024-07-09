@@ -15,4 +15,3 @@ export class Item {
 }
 
 export const ItemSchema = SchemaFactory.createForClass(Item);
-
